@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tambah Data Fasilitas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+    .form-container input, .form-container textarea, .form-container button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Tambah Data Fasilitas</h2>
+    <form id="formFasilitas" onsubmit="return validateFasilitas()">
+      <input type="text" id="namaFasilitas" placeholder="Nama Fasilitas" required />
+      <textarea id="deskripsiFasilitas" placeholder="Deskripsi Fasilitas" rows="4" required></textarea>
+      <button type="submit">Simpan</button>
+    </form>
+  </div>
+
+  <script>
+    function validateFasilitas() {
+      const namaFasilitas = document.getElementById('namaFasilitas').value.trim();
+      const deskripsiFasilitas = document.getElementById('deskripsiFasilitas').value.trim();
+
+      if (namaFasilitas === '') {
+        alert('Nama fasilitas harus diisi');
+        return false;
+      }
+      if (deskripsiFasilitas === '') {
+        alert('Deskripsi fasilitas harus diisi');
+        return false;
+      }
+
+      alert('Data fasilitas berhasil disimpan');
+      return true;
+    }
+  </script>
+</body>
+</html>

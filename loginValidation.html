@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Validation</title>
+    <script>
+        function validateLogin() {
+            // Mendapatkan nilai input dari form
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Mengecek apakah input kosong
+            if (username === "" || password === "") {
+                alert("Username dan password tidak boleh kosong!");
+                return false;
+            }
+
+            // Memeriksa kredensial yang benar
+            var validUsername = "user123";
+            var validPassword = "password123";
+
+            // Validasi username dan password
+            if (username === validUsername && password === validPassword) {
+                alert("Berhasil");
+            } else {
+                alert("Gagal");
+            }
+            return false; // Menghentikan form dari reload halaman
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Login Form</h2>
+    <form onsubmit="return validateLogin();">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br><br>
+
+        <input type="submit" value="Login">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota Penjualan</title>
+    <script>
+        function tampilkanData() {
+            var kode = document.form1.kode.value;
+            var jumlahBeli = parseInt(document.form1.jumlahBeli.value) || 0;
+            var harga = 0;
+            var namaBarang = "";
+            var persenPotongan = 0;
+
+            // Menentukan nama barang dan harga berdasarkan kode
+            if (kode === "B001") {
+                namaBarang = "Buku";
+                harga = 5000;
+            } else if (kode === "B002") {
+                namaBarang = "Penggaris";
+                harga = 1500;
+            } else if (kode === "B003") {
+                namaBarang = "Pulpen";
+                harga = 2000;
+            }
+
+            // Menentukan persen potongan berdasarkan jumlah beli
+            if (jumlahBeli >= 0 && jumlahBeli <= 10) {
+                persenPotongan = 5;
+            } else if (jumlahBeli >= 11 && jumlahBeli <= 20) {
+                persenPotongan = 10;
+            } else if (jumlahBeli > 20) {
+                persenPotongan = 15;
+            }
+
+            // Hitung jumlah bayar, potongan, dan total bayar
+            var jumlahBayar = harga * jumlahBeli;
+            var potongan = (persenPotongan / 100) * jumlahBayar;
+            var totalBayar = jumlahBayar - potongan;
+
+            // Tampilkan hasil pada form
+            document.form1.namaBarang.value = namaBarang;
+            document.form1.harga.value = harga;
+            document.form1.jumlahBayar.value = jumlahBayar;
+            document.form1.potongan.value = potongan;
+            document.form1.totalBayar.value = totalBayar;
+        }
+    </script>
+</head>
+<body>
+
+    <form name="form1">
+        <fieldset>
+            <legend>Data Penjualan Barang</legend>
+            
+            <label>Kode:</label>
+            <select name="kode" onchange="tampilkanData()">
+                <option value="">-Pilih Salah Satu-</option>
+                <option value="B001">B001</option>
+                <option value="B002">B002</option>
+                <option value="B003">B003</option>
+            </select>
+            <br><br>
+
+            <label>Jumlah Beli:</label>
+            <input type="text" name="jumlahBeli" value="0" onchange="tampilkanData()">
+            <br><br>
+
+            <label>Nama Barang:</label>
+            <input type="text" name="namaBarang" readonly>
+            <br><br>
+
+            <label>Harga:</label>
+            <input type="text" name="harga" value="0" readonly>
+            <br><br>
+
+            <label>Jumlah Bayar:</label>
+            <input type="text" name="jumlahBayar" readonly>
+            <br><br>
+
+            <label>Potongan:</label>
+            <input type="text" name="potongan" readonly>
+            <br><br>
+
+            <label>Total Bayar:</label>
+            <input type="text" name="totalBayar" readonly>
+            <br><br>
+
+            <input type="button" value="TAMPILKAN" onclick="tampilkanData()">
+        </fieldset>
+    </form>
+
+</body>
+</html>

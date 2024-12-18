@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hitung Penjualan</title>
+</head>
+<body>
+    <h2>Data Penjualan Barang</h2>
+    <table border="1">
+        <tr>
+            <td>Kode</td>
+            <td>Nama</td>
+            <td>Harga</td>
+        </tr>
+        <tr>
+            <td><select id="kodeBarang">
+                <option value="B001">Buku</option>
+                <option value="B002">Penggaris</option>
+                <option value="B003">Pulpen</option>
+            </select></td>
+            <td><input type="text" id="namaBarang" readonly></td>
+            <td><input type="text" id="hargaBarang" readonly></td>
+        </tr>
+        <tr>
+            <td>Jumlah Beli</td>
+            <td colspan="2"><input type="number" id="jumlahBeli" oninput="hitungTotal()"></td>
+        </tr>
+        <tr>
+            <td>Nama Barang</td>
+            <td colspan="2"><input type="text" id="namaBarangHasil" readonly></td>
+        </tr>
+        <tr>
+            <td>Harga</td>
+            <td colspan="2"><input type="text" id="hargaHasil" readonly></td>
+        </tr>
+        <tr>
+            <td>Jumlah Bayar</td>
+            <td colspan="2"><input type="text" id="jumlahBayar" readonly></td>
+        </tr>
+        <tr>
+            <td>Potongan</td>
+            <td colspan="2"><input type="text" id="potongan" readonly></td>
+        </tr>
+        <tr>
+            <td>Total Bayar</td>
+            <td colspan="2"><input type="text" id="totalBayar" readonly></td>
+        </tr>
+        <tr>
+            <td colspan="3"><button onclick="tampilkanNota()">TAMPILKAN</button></td>
+        </tr>
+    </table>
+
+    <div id="nota" style="display:none;">
+        <h2>Nota Penjualan</h2>
+        <p id="detailNota"></p>
+    </div>
+
+    <script>
+        function hitungTotal() {
+            const kode = document.getElementById("kodeBarang").value;
+            const jumlahBeli = document.getElementById("jumlahBeli").value;
+
+            // Data harga barang
+            const hargaBarang = {
+                B001: 5000,
+                B002: 1500,
+                B003: 2000
+            };
+
+            // Data nama barang
+            const namaBarang = {
+                B001: "Buku",
+                B002: "Penggaris",
+                B003: "Pulpen"
+            };
+
+            // Hitung total
+            const hargaSatuan = hargaBarang[kode];
+            const jumlahBayar = hargaSatuan * jumlahBeli;
+
+            // Hitung potongan
+            let potonganPersen = 0;
+            if (jumlahBayar > 20000) {
+                potonganPersen = 15;
+            } else if (jumlahBayar > 10000) {
+                potonganPersen = 10;
+            } else if (jumlahBayar > 0) {
+                potonganPersen = 5;
+            }
+            const potonganRupiah = (jumlahBayar * potonganPersen) / 100;
+            const totalBayar = jumlahBayar - potonganRupiah;
+
+            // Tampilkan hasil
+            document.getElementById("namaBarang").value = namaBarang[kode];
+            document.getElementById("hargaBarang").value = hargaSatuan;
+            document.getElementById("jumlahBayar").value = jumlahBayar;
+            document.getElementById("potongan").value = potonganRupiah;
+            document.getElementById("totalBayar").value = totalBayar;
+        }
+
+        function tampilkanNota() {
+            const kode = document.getElementById("kodeBarang").value;
+            const namaBarang = document.getElementById("namaBarang").value;
+            const harga = document.getElementById("hargaBarang").value;
+            const jumlahBeli = document.getElementById("jumlahBeli").value;
+            const potongan = document.getElementById("potongan").value;
+            const totalBayar = document.getElementById("totalBayar").value;
+
+            const detail = `
+                Kode Barang = ${kode}
+                Nama Barang = ${namaBarang}
+                Harga Barang = ${harga}
+                Jumlah Beli = ${jumlahBeli}
+                Jumlah Bayar = ${jumlahBayar}
+                Potongan = ${potongan}
+                Total Bayar = ${totalBayar}
+            `;
+
+            document.getElementById("detailNota").textContent = detail;
+            document.getElementById("nota").style.display = "block";
+        }
+    </script>
+</body>
+</html>

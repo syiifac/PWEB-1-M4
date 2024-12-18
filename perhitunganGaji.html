@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Gaji</title>
+    <script>
+        function hit() {
+            var gol = document.form1.gol.value;
+            var jumlahAnak = parseInt(document.form1.anak.value) || 0;
+            var gajiPokok = 0;
+            var persenTunjangan = 0;
+
+            // Set gaji pokok dan persen tunjangan berdasarkan golongan
+            if (gol === "I") {
+                gajiPokok = 250000;
+                persenTunjangan = 5;
+            } else if (gol === "II") {
+                gajiPokok = 300000;
+                persenTunjangan = 10;
+            } else if (gol === "III") {
+                gajiPokok = 350000;
+                persenTunjangan = 15;
+            }
+
+            // Hitung tunjangan dan gaji bersih
+            var tunjangan = (jumlahAnak * gajiPokok) * (persenTunjangan / 100);
+            var gajiBersih = gajiPokok + tunjangan;
+
+            // Tampilkan hasil pada form
+            document.form1.gapok.value = gajiPokok;
+            document.form1.tunjangan.value = tunjangan;
+            document.form1.gaji.value = gajiBersih;
+        }
+    </script>
+</head>
+<body>
+
+    <form name="form1">
+        <fieldset>
+            <legend>PERHITUNGAN GAJI</legend>
+            <label>Golongan:</label>
+            <select name="gol">
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+            </select>
+            <br><br>
+
+            <label>Jumlah Anak:</label>
+            <input type="text" name="anak" size="10" maxlength="10">
+            <br><br>
+
+            <input type="button" name="hitung" value="Hitung" onclick="hit()">
+            <input type="reset" name="Batal" value="Cancel">
+            <br><br>
+
+            <label>Gaji Pokok:</label>
+            <input type="text" name="gapok" readonly>
+            <br><br>
+
+            <label>Tunjangan:</label>
+            <input type="text" name="tunjangan" readonly>
+            <br><br>
+
+            <label>Gaji Bersih:</label>
+            <input type="text" name="gaji" readonly>
+        </fieldset>
+    </form>
+
+</body>
+</html>
